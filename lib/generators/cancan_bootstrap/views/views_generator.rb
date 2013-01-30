@@ -65,7 +65,7 @@ module CancanBootstrap
         modules = name.include?('/') ? name.split('/') : name.split('::')
         name    = modules.pop
         path    = modules.map { |m| m.underscore }
-        file_path = (path + [name.underscore]).join('/')
+        file_path = (path + [name.pluralize.underscore]).join('/')
         nesting = modules.map { |m| m.camelize }.join('::')
         [name, path, file_path, nesting, modules.size]
       end
