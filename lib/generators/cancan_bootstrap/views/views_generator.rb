@@ -1,9 +1,9 @@
 require 'rails/generators'
 require 'rails/generators/generated_attribute'
 
-module Bootstrap
+module CancanBootstrap
   module Generators
-    class ThemedGenerator < ::Rails::Generators::Base
+    class ViewsGenerator < ::Rails::Generators::Base
       source_root File.expand_path('../templates', __FILE__)
       argument :controller_path,    :type => :string
       argument :model_name,         :type => :string, :required => false
