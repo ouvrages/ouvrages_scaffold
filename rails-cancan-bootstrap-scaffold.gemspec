@@ -6,11 +6,11 @@ require 'rails-cancan-bootstrap-scaffold/version'
 Gem::Specification.new do |gem|
   gem.name          = "rails-cancan-bootstrap-scaffold"
   gem.version       = Rails::Cancan::Bootstrap::Scaffold::VERSION
-  gem.authors       = ["Michael Witrant"]
-  gem.email         = ["michael@ouvrages-web.fr"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.authors       = ["Ouvrages"]
+  gem.email         = ["contact@ouvrages-web.fr"]
+  gem.description   = %q{Bootstrap & cancan generators for Rails}
+  gem.summary       = %q{Rails generators that produce standard code for Bootstrap and Cancan.}
+  gem.homepage      = "https://github.com/ouvrages/rails-cancan-bootstrap-scaffold"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

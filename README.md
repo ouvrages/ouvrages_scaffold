@@ -1,6 +1,6 @@
 # Rails::Cancan::Bootstrap::Scaffold
 
-Generators that produce standard code for Bootstrap and Cancan.
+Rails generators that produce standard code for Bootstrap and Cancan.
 
 ## Installation
 
