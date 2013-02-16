@@ -1,4 +1,4 @@
 <%= locale %>:
   activerecord:
     models:
-      <%= singular_table_name %>: <%= translate name %>
+      <%= singular_table_name %>: <%= @translated %>
