@@ -1,3 +1,5 @@
 - model_class = @<%= resource_name %>.class
-- @title = t('.title')
+- add_crumb t('.title')
+- content_for :title, t('.title')
+
 = render :partial => "form"
