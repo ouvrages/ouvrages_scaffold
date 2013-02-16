@@ -2,6 +2,10 @@
 class <%= controller_class_name %>Controller < ApplicationController
   load_and_authorize_resource
 
+  before_filter do
+    add_crumb t("navigation.<%= plural_table_name %>"), <%= plural_table_name %>_path
+  end
+
   # GET <%= route_url %>
   # GET <%= route_url %>.json
   def index

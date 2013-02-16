@@ -18,7 +18,7 @@ fr:
       new: Créer <%= indefinite_article %> <%= translated %>
 
     edit:
-      title: Modification d'<%= indefinite_article %> <%= translated %>
+      title: "Modification <%= partitive_article %> <%= translated %> %{name}"
 
     new:
       title: <%= gender_mf("Nouveau", "Nouvelle") %> <%= translated %>
@@ -28,7 +28,7 @@ fr:
       cancel: Annuler
 
     show:
-      title: <%= capitalize_first_letter(translated) %>
+      title: "<%= capitalize_first_letter(translated) %> %{name}"
       edit: *edit
       destroy: *destroy
       confirm: *confirm

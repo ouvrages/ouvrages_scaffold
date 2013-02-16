@@ -1,5 +1,6 @@
 - model_class = @<%= resource_name %>.class
-- @title = t('.title')
+- add_crumb t(".title", name: @<%= resource_name %>.id)
+- content_for(:title, t(".title", name: @<%= resource_name %>.id))
 
 <%- columns.each do |column| -%>
 %p

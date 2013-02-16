@@ -18,7 +18,7 @@ en:
       new: Add <%= indefinite_article %> <%= translated %>
 
     edit:
-      title: Modify <%= indefinite_article %> <%= translated %>
+      title: "Modification of <%= translated %> %{name}"
 
     new:
       title: New <%= translated %>
@@ -28,7 +28,7 @@ en:
       cancel: Cancel
       
     show:
-      title: <%= capitalize_first_letter(translated) %>
+      title: "<%= capitalize_first_letter(translated) %> %{name}"
       edit: *edit
       destroy: *destroy
       confirm: *confirm

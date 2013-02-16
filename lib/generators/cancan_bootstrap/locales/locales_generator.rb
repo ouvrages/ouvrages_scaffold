@@ -133,6 +133,21 @@ module CancanBootstrap
           raise "Unknown locale: #{locale.inspect}"
         end
       end
+      
+      def partitive_article
+        case locale
+        when "en"
+          raise "Not supported"
+        when "fr"
+          if gender == :f
+            "de la"
+          else
+            "du"
+          end
+        else
+          raise "Unknown locale: #{locale.inspect}"
+        end
+      end
     end
   end
 end
