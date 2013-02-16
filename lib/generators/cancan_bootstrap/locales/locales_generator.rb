@@ -109,7 +109,9 @@ module CancanBootstrap
         when "en"
           "the #{resource}"
         when "fr"
-          if gender == :f
+          if start_with_vowel?
+            "l'#{resource}"
+          elsif gender == :f
             "la #{resource}"
           else
             "le #{resource}"
@@ -124,7 +126,9 @@ module CancanBootstrap
         when "en"
           "of #{resource}"
         when "fr"
-          if gender == :f
+          if start_with_vowel?
+            "de l'#{resource}"
+          elsif gender == :f
             "de la #{resource}"
           else
             "du #{resource}"
@@ -134,10 +138,14 @@ module CancanBootstrap
         end
       end
       
+      def start_with_vowel?
+        %w(a e i o u ).include?(translated[0])
+      end
+      
       def a_resource
         case locale
         when "en"
-          if %w(a e i o u ).include?(translated[0])
+          if start_with_vowel?
             "an #{resource}"
           else
             "a #{resource}"
