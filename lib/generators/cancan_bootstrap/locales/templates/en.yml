@@ -6,19 +6,17 @@ en:
   <%= plural_table_name %>:
     index:
       title: List of <%= plural translated %>
-      edit: 
-      destroy: 
-      confirm: 
+      actions: Actions
+      edit: Edit
+      destroy: Delete
+      confirm: <%= capitalize_first_letter(definite_article) %> <%= translated %> will by deleted. Are you sure?
       new: Add <%= indefinite_article %> <%= translated %>
-      empty_list_notice: There is no <%= translated %> for now
 
     edit:
       title: Modify <%= indefinite_article %> <%= translated %>
-      back: 
 
     new:
       title: New <%= translated %>
-      back: 
 
     form:
       submit: Create <%= definite_article %> <%= translated %>

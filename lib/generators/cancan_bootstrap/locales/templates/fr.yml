@@ -6,18 +6,17 @@ fr:
   <%= plural_table_name %>:
     index:
       title: Liste des <%= plural translated %>
-      edit: 
-      destroy: 
-      confirm: 
+      actions: Actions
+      edit: Modifier
+      destroy: Supprimer
+      confirm: <%= capitalize_first_letter(definite_article) %> <%= translated %> sera <%= gender_mf("supprimé", "supprimée") %>. Êtes vous sûr ?
       new: Créer <%= indefinite_article %> <%= translated %>
 
     edit:
       title: Modification d'<%= indefinite_article %> <%= translated %>
-      back: 
 
     new:
       title: <%= gender_mf("Nouveau", "Nouvelle") %> <%= translated %>
-      back: 
       
     form:
       submit: Créer <%= definite_article %> <%= translated %>
