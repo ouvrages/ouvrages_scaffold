@@ -7,9 +7,9 @@ en:
     index:
       title: List of <%= plural translated %>
       actions: Actions
-      edit: Edit
-      destroy: Delete
-      confirm: <%= capitalize_first_letter(definite_article) %> <%= translated %> will by deleted. Are you sure?
+      edit: &edit Edit
+      destroy: &destroy Delete
+      confirm: &confirm <%= capitalize_first_letter(definite_article) %> <%= translated %> will by deleted. Are you sure?
       new: Add <%= indefinite_article %> <%= translated %>
 
     edit:
@@ -21,6 +21,13 @@ en:
     form:
       submit: Create <%= definite_article %> <%= translated %>
       cancel: Cancel
+      
+    show:
+      title: <%= capitalize_first_letter(translated) %>
+      edit: *edit
+      destroy: *destroy
+      confirm: *confirm
+      back: Back
 
   navigation:
     <%= plural_table_name %>: <%= capitalize_first_letter(plural(translated)) %>

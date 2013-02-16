@@ -1,6 +1,5 @@
 - model_class = @<%= resource_name %>.class
-
-- @title = t '.title', :default => model_class.model_name.human
+- @title = t('.title')
 
 <%- columns.each do |column| -%>
 %p
@@ -10,6 +9,6 @@
 <%- end -%>
 
 .form-actions
-  = link_to t('.back', :default => t("helpers.links.back")), <%= controller_routing_path %>_path, :class => 'btn'
-  = link_to t('.edit', :default => t("helpers.links.edit")), edit_<%= singular_controller_routing_path %>_path(@<%= resource_name %>), :class => 'btn' if can? :update, @<%= resource_name %>
-  = link_to t('.destroy', :default => t("helpers.links.destroy")), <%= singular_controller_routing_path %>_path(@<%= resource_name %>), :method => "delete", :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')), :class => 'btn btn-danger' if can? :destroy, @<%= resource_name %>
+  = link_to t('.back'), <%= controller_routing_path %>_path, :class => 'btn'
+  = link_to t('.edit'), edit_<%= singular_controller_routing_path %>_path(@<%= resource_name %>), :class => 'btn' if can? :update, @<%= resource_name %>
+  = link_to t('.destroy'), <%= singular_controller_routing_path %>_path(@<%= resource_name %>), :method => "delete", :confirm => t('.confirm'), :class => 'btn btn-danger' if can? :destroy, @<%= resource_name %>

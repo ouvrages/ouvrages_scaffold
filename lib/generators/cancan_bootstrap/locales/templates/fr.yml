@@ -7,9 +7,9 @@ fr:
     index:
       title: Liste des <%= plural translated %>
       actions: Actions
-      edit: Modifier
-      destroy: Supprimer
-      confirm: <%= capitalize_first_letter(definite_article) %> <%= translated %> sera <%= gender_mf("supprimé", "supprimée") %>. Êtes vous sûr ?
+      edit: &edit Modifier
+      destroy: &destroy Supprimer
+      confirm: &confirm <%= capitalize_first_letter(definite_article) %> <%= translated %> sera <%= gender_mf("supprimé", "supprimée") %>. Êtes vous sûr ?
       new: Créer <%= indefinite_article %> <%= translated %>
 
     edit:
@@ -22,5 +22,12 @@ fr:
       submit: Créer <%= definite_article %> <%= translated %>
       cancel: Annuler
 
+    show:
+      title: <%= capitalize_first_letter(translated) %>
+      edit: *edit
+      destroy: *destroy
+      confirm: *confirm
+      back: Retour
+      
   navigation:
     <%= plural_table_name %>: <%= capitalize_first_letter(plural(translated)) %>
