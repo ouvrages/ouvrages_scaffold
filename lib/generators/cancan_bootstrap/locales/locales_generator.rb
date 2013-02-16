@@ -96,57 +96,66 @@ module CancanBootstrap
         string[0].capitalize + string[1..-1]
       end
       
-      def gender_mf(m, f)
-        gender == :f ? f : m
+      def resource
+        translated
       end
       
-      def indefinite_article
+      def resources
+        translated.pluralize
+      end
+      
+      def the_resource
+        case locale
+        when "en"
+          "the #{resource}"
+        when "fr"
+          if gender == :f
+            "la #{resource}"
+          else
+            "le #{resource}"
+          end
+        else
+          raise "Unknown locale: #{locale.inspect}"
+        end
+      end
+      
+      def of_resource
+        case locale
+        when "en"
+          "of #{resource}"
+        when "fr"
+          if gender == :f
+            "de la #{resource}"
+          else
+            "du #{resource}"
+          end
+        else
+          raise "Unknown locale: #{locale.inspect}"
+        end
+      end
+      
+      def a_resource
         case locale
         when "en"
           if %w(a e i o u ).include?(translated[0])
-            "an"
+            "an #{resource}"
           else
-            "a"
+            "a #{resource}"
           end
         when "fr"
           if gender == :f
-            "une"
+            "une #{resource}"
           else
-            "un"
+            "un #{resource}"
           end
         else
           raise "Unknown locale: #{locale.inspect}"
         end
       end
-
-      def definite_article
-        case locale
-        when "en"
-          "the"
-        when "fr"
-          if gender == :f
-            "la"
-          else
-            "le"
-          end
-        else
-          raise "Unknown locale: #{locale.inspect}"
-        end
-      end
+        
       
-      def partitive_article
-        case locale
-        when "en"
-          raise "Not supported"
-        when "fr"
-          if gender == :f
-            "de la"
-          else
-            "du"
-          end
-        else
-          raise "Unknown locale: #{locale.inspect}"
-        end
+      def gender_select(values)
+        values[gender]
       end
     end
   end

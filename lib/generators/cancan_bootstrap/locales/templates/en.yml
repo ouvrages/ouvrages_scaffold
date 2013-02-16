@@ -1,7 +1,7 @@
 en:
   activerecord:
     models:
-      <%= singular_table_name %>: <%= capitalize_first_letter(translated) %>
+      <%= singular_table_name %>: <%= capitalize_first_letter(resource) %>
     attributes:
       <%= singular_table_name %>:
 <%- columns.each do |column| -%>
@@ -10,30 +10,30 @@ en:
   
   <%= plural_table_name %>:
     index:
-      title: List of <%= plural translated %>
+      title: List of <%= resources %>
       actions: Actions
       show: Show
       edit: &edit Edit
       destroy: &destroy Delete
-      confirm: &confirm <%= capitalize_first_letter(definite_article) %> <%= translated %> will by deleted. Are you sure?
-      new: Add <%= indefinite_article %> <%= translated %>
+      confirm: &confirm <%= capitalize_first_letter(the_resource) %> will by deleted. Are you sure?
+      new: Add <%= a_resource %>
 
     edit:
-      title: "Modification of <%= translated %> %{name}"
+      title: "Modification <%= of_resource %> %{name}"
 
     new:
-      title: New <%= translated %>
+      title: New <%= resource %>
 
     form:
-      submit: Save <%= definite_article %> <%= translated %>
+      submit: Save <%= the_resource %>
       cancel: Cancel
       
     show:
-      title: "<%= capitalize_first_letter(translated) %> %{name}"
+      title: "<%= capitalize_first_letter(resource) %> %{name}"
       edit: *edit
       destroy: *destroy
       confirm: *confirm
       back: Back
 
   navigation:
-    <%= plural_table_name %>: <%= capitalize_first_letter(plural(translated)) %>
+    <%= plural_table_name %>: <%= capitalize_first_letter(resources) %>

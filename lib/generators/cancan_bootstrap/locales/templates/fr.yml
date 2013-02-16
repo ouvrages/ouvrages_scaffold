@@ -1,7 +1,7 @@
 fr:
   activerecord:
     models:
-      <%= singular_table_name %>: <%= capitalize_first_letter(translated) %>
+      <%= singular_table_name %>: <%= capitalize_first_letter resource %>
     attributes:
       <%= singular_table_name %>:
 <%- columns.each do |column| -%>
@@ -10,30 +10,30 @@ fr:
 
   <%= plural_table_name %>:
     index:
-      title: Liste des <%= plural translated %>
+      title: Liste des <%= resources %>
       actions: Actions
       show: Voir
       edit: &edit Modifier
       destroy: &destroy Supprimer
-      confirm: &confirm <%= capitalize_first_letter(definite_article) %> <%= translated %> sera <%= gender_mf("supprimé", "supprimée") %>. Êtes vous sûr ?
-      new: Créer <%= indefinite_article %> <%= translated %>
+      confirm: &confirm <%= capitalize_first_letter(the_resource) %> sera <%= gender_select(m: "supprimé", f: "supprimée") %>. Êtes vous sûr ?
+      new: Créer <%= a_resource %>
 
     edit:
-      title: "Modification <%= partitive_article %> <%= translated %> %{name}"
+      title: "Modification <%= of_resource %> %{name}"
 
     new:
-      title: <%= gender_mf("Nouveau", "Nouvelle") %> <%= translated %>
+      title: <%= gender_select(m: "Nouveau", f: "Nouvelle") %> <%= resource %>
       
     form:
-      submit: Enregistrer <%= definite_article %> <%= translated %>
+      submit: Enregistrer <%= the_resource %>
       cancel: Annuler
 
     show:
-      title: "<%= capitalize_first_letter(translated) %> %{name}"
+      title: "<%= capitalize_first_letter(resource) %> %{name}"
       edit: *edit
       destroy: *destroy
       confirm: *confirm
       back: Retour
       
   navigation:
-    <%= plural_table_name %>: <%= capitalize_first_letter(plural(translated)) %>
+    <%= plural_table_name %>: <%= capitalize_first_letter(resources) %>
