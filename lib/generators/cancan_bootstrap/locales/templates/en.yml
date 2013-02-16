@@ -9,11 +9,11 @@ en:
       edit: 
       destroy: 
       confirm: 
-      new: Add a <%= translated %>
+      new: Add <%= indefinite_article %> <%= translated %>
       empty_list_notice: There is no <%= translated %> for now
 
     edit:
-      title: Modify a <%= translated %>
+      title: Modify <%= indefinite_article %> <%= translated %>
       back: 
 
     new:

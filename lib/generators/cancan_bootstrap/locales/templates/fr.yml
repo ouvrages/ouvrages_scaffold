@@ -9,14 +9,14 @@ fr:
       edit: 
       destroy: 
       confirm: 
-      new: Créer un<%= "e" if gender == :f %> <%= translated %>
+      new: Créer <%= indefinite_article %> <%= translated %>
 
     edit:
-      title: Modification d'un<%= "e" if gender == :f %> <%= translated %>
+      title: Modification d'<%= indefinite_article %> <%= translated %>
       back: 
 
     new:
-      title: <%= gender == :f ? "Nouvelle" : "Nouveau" %> <%= translated %>
+      title: <%= gender_mf("Nouveau", "Nouvelle") %> <%= translated %>
       back: 
 
   navigation:

@@ -47,6 +47,29 @@ module CancanBootstrap
       def capitalize_first_letter(string)
         string[0].capitalize + string[1..-1]
       end
+      
+      def gender_mf(m, f)
+        gender == :f ? f : m
+      end
+      
+      def indefinite_article
+        case locale
+        when "en"
+          if %w(a e i o u ).include?(translated[0])
+            "an"
+          else
+            "a"
+          end
+        when "fr"
+          if gender == :f
+            "une"
+          else
+            "un"
+          end
+        else
+          raise "Unknown locale: #{locale.inspect}"
+        end
+      end
     end
   end
 end
