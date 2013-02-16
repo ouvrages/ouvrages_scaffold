@@ -34,6 +34,16 @@ module CancanBootstrap
       end
       
       protected
+      
+      def columns
+        begin
+          excluded_column_names = %w[]
+          class_name.constantize.columns.reject{|c| excluded_column_names.include?(c.name) }.collect{|c| ::Rails::Generators::GeneratedAttribute.new(c.name, c.type)}
+        rescue NoMethodError
+          class_name.constantize.fields.collect{|c| c[1]}.reject{|c| excluded_column_names.include?(c.name) }.collect{|c| ::Rails::Generators::GeneratedAttribute.new(c.name, c.type.to_s)}
+        end
+      end
+      
       attr_reader :locale, :translated, :gender
       
       def translate(string)

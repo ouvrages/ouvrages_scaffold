@@ -2,6 +2,11 @@ fr:
   activerecord:
     models:
       <%= singular_table_name %>: <%= capitalize_first_letter(translated) %>
+    attributes:
+      <%= singular_table_name %>:
+<%- columns.each do |column| -%>
+        <%= column.name %>: 
+<%- end -%>
 
   <%= plural_table_name %>:
     index:
