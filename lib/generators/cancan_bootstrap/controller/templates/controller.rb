@@ -42,7 +42,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def create
     respond_to do |format|
       if @<%= orm_instance.save %>
-        format.html { redirect_to @<%= singular_table_name %>, notice: <%= "'#{human_name} was successfully created.'" %> }
+        format.html { redirect_to @<%= singular_table_name %>, flash: {success: t("<%= plural_table_name %>.created")} }
         format.json { render json: <%= "@#{singular_table_name}" %>, status: :created, location: <%= "@#{singular_table_name}" %> }
       else
         format.html { render action: "new" }
@@ -56,7 +56,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def update
     respond_to do |format|
       if @<%= orm_instance.update_attributes("params[:#{singular_table_name}]") %>
-        format.html { redirect_to @<%= singular_table_name %>, notice: <%= "'#{human_name} was successfully updated.'" %> }
+        format.html { redirect_to @<%= singular_table_name %>, flash: {success: t("<%= plural_table_name %>.updated")} }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
