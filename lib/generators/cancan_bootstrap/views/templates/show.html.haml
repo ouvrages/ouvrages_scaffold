@@ -1,10 +1,9 @@
-- model_class = @<%= resource_name %>.class
-- add_crumb t(".title", name: @<%= resource_name %>.id)
 - content_for(:title, t(".title", name: @<%= resource_name %>.id))
+- add_crumb content_for(:title)
 
 <%- columns.each do |column| -%>
 %dl.dl-horizontal
-  %dt= model_class.human_attribute_name(:<%= column.name %>)
+  %dt= @<%= resource_name %>.class.human_attribute_name(:<%= column.name %>)
   %dd= @<%= resource_name %>.<%= column.name %>
 <%- end -%>
 

@@ -1,12 +1,12 @@
-- model_class = <%= resource_name.classify %>.new.class
+- content_for :title, t('.title')
 
 %table.table.table-striped
   %thead
     %tr
       <%- columns.each do |column| -%>
-      %th= model_class.human_attribute_name(:<%= column.name %>)
+      %th= <%= resource_name.classify %>.human_attribute_name(:<%= column.name %>)
       <%- end -%>
-      %th=t('.actions')
+      %th= t('.actions')
   %tbody
     - @<%= plural_resource_name %>.each do |<%= resource_name %>|
       %tr

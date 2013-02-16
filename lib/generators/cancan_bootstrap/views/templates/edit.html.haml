@@ -1,5 +1,4 @@
-- model_class = @<%= resource_name %>.class
-- add_crumb t('.title', name: @<%= resource_name %>.id)
 - content_for :title, t('.title', name: @<%= resource_name %>.id)
+- add_crumb content_for(:title)
 
 = render :partial => "form"
