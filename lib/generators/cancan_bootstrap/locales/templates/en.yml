@@ -5,7 +5,7 @@ en:
     attributes:
       <%= singular_table_name %>:
 <%- columns.each do |column| -%>
-        <%= column.name %>: 
+        <%= column.name %>: <%= capitalize_first_letter(translate(column.name.humanize)) %>
 <%- end -%>
   
   <%= plural_table_name %>:

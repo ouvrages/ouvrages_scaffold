@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'rails/generators/resource_helpers'
 
 module CancanBootstrap
@@ -17,9 +19,7 @@ module CancanBootstrap
           @gender = :m
           @translated = english
           if locale != "en"
-            url = "http://api.wordreference.com/0.8/505fc/json/enfr/#{URI.escape(english)}"
-            response = HTTParty.get(url)
-            data = JSON.parse(response.body)
+            data = fetch_translation(english)
             if data["term0"]
               translations = data["term0"]["PrincipalTranslations"] || data["term0"]["Entries"]
               translation = translations["0"]["FirstTranslation"]
@@ -45,9 +45,47 @@ module CancanBootstrap
       end
       
       attr_reader :locale, :translated, :gender
+
+      def fetch_translation(string)
+        Rails.cache.fetch(["translation", string]) do
+          url = "http://api.wordreference.com/0.8/505fc/json/en#{locale}/#{URI.escape(string)}"
+          response = HTTParty.get(url)
+          JSON.parse(response.body)
+        end
+      end
       
       def translate(string)
-        string
+        result = case locale
+        when "en"
+          case string
+          when "Id" then "ID"
+          when "Created at" then "Creation date"
+          when "Updated at" then "Last update"
+          else string.humanize
+          end
+        when "fr"
+          case string
+          when "Id" then "Identifiant"
+          when "Created at" then "Date de création"
+          when "Updated at" then "Dernière mise à jour"
+          else translate_string(string, string.humanize)
+          end
+        else
+          raise "Unknown locale: #{locale.inspect}"
+        end
+        result.force_encoding('ASCII-8BIT') # template is loaded as ASCII so it throws and incompatibility error
+      end
+      
+      def translate_string(string, default = string)
+        data = fetch_translation(string)
+        if data["term0"]
+          translations = data["term0"]["PrincipalTranslations"] || data["term0"]["Entries"]
+          translation = translations["0"]["FirstTranslation"]
+          translated = translation["term"]
+          translated
+        else
+          default
+        end
       end
       
       def plural(string)
