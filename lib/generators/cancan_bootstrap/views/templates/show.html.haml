@@ -3,10 +3,9 @@
 - content_for(:title, t(".title", name: @<%= resource_name %>.id))
 
 <%- columns.each do |column| -%>
-%p
-  %strong= model_class.human_attribute_name(:<%= column.name %>) + ':'
-  %br
-  = @<%= resource_name %>.<%= column.name %>
+%dl
+  %dt= model_class.human_attribute_name(:<%= column.name %>)
+  %dd= @<%= resource_name %>.<%= column.name %>
 <%- end -%>
 
 .form-actions
