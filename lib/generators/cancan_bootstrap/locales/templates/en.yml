@@ -1,0 +1,24 @@
+en:
+  activerecord:
+    models:
+      <%= singular_table_name %>: <%= capitalize_first_letter(translated) %>
+
+  <%= plural_table_name %>:
+    index:
+      title: List of <%= plural translated %>
+      edit: 
+      destroy: 
+      confirm: 
+      new: Add a <%= translated %>
+      empty_list_notice: There is no <%= translated %> for now
+
+    edit:
+      title: Modify a <%= translated %>
+      back: 
+
+    new:
+      title: New <%= translated %>
+      back: 
+
+  navigation:
+    <%= plural_table_name %>: <%= capitalize_first_letter(plural(translated)) %>

@@ -1,0 +1,23 @@
+fr:
+  activerecord:
+    models:
+      <%= singular_table_name %>: <%= capitalize_first_letter(translated) %>
+
+  <%= plural_table_name %>:
+    index:
+      title: Liste des <%= plural translated %>
+      edit: 
+      destroy: 
+      confirm: 
+      new: Créer un<%= "e" if gender == :f %> <%= translated %>
+
+    edit:
+      title: Modification d'un<%= "e" if gender == :f %> <%= translated %>
+      back: 
+
+    new:
+      title: <%= gender == :f ? "Nouvelle" : "Nouveau" %> <%= translated %>
+      back: 
+
+  navigation:
+    <%= plural_table_name %>: <%= capitalize_first_letter(plural(translated)) %>

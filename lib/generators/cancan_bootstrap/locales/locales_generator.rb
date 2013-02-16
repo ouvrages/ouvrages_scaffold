@@ -6,7 +6,7 @@ module CancanBootstrap
       include Rails::Generators::ResourceHelpers
       source_root File.expand_path('../templates', __FILE__)
 
-      argument :locales, :type => :array, :default => I18n.available_locales.map(&:to_s), :banner => "locale"
+      argument :locales, :type => :array, :default => %w( en fr ), :banner => "locale"
       
       def create_locale_files
         require 'httparty'
@@ -24,23 +24,28 @@ module CancanBootstrap
               translations = data["term0"]["PrincipalTranslations"] || data["term0"]["Entries"]
               translation = translations["0"]["FirstTranslation"]
               @translated = translation["term"]
-              p @translated
               if translation["POS"] == "nf"
                 @gender = :f
               end
             end
           end
-          template "locale.yml", File.join('config/locales', "#{singular_table_name}.#{locale}.yml")
+          template "#{locale}.yml", File.join('config/locales', "#{singular_table_name}.#{locale}.yml")
         end
       end
       
       protected
-      def locale
-        @locale
-      end
+      attr_reader :locale, :translated, :gender
       
       def translate(string)
         string
+      end
+      
+      def plural(string)
+        string.pluralize
+      end
+      
+      def capitalize_first_letter(string)
+        string[0].capitalize + string[1..-1]
       end
     end
   end
