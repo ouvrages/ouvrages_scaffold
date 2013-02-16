@@ -14,6 +14,10 @@ module CancanBootstrap
       def generate_views
         invoke "cancan_bootstrap:views"
       end
+
+      def generate_locales
+        invoke "cancan_bootstrap:locales"
+      end
     end
   end
 end
