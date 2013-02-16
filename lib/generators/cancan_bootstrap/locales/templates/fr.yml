@@ -12,6 +12,7 @@ fr:
     index:
       title: Liste des <%= plural translated %>
       actions: Actions
+      show: Voir
       edit: &edit Modifier
       destroy: &destroy Supprimer
       confirm: &confirm <%= capitalize_first_letter(definite_article) %> <%= translated %> sera <%= gender_mf("supprimé", "supprimée") %>. Êtes vous sûr ?

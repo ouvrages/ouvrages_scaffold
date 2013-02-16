@@ -12,6 +12,7 @@ en:
     index:
       title: List of <%= plural translated %>
       actions: Actions
+      show: Show
       edit: &edit Edit
       destroy: &destroy Delete
       confirm: &confirm <%= capitalize_first_letter(definite_article) %> <%= translated %> will by deleted. Are you sure?
