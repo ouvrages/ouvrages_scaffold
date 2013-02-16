@@ -70,6 +70,21 @@ module CancanBootstrap
           raise "Unknown locale: #{locale.inspect}"
         end
       end
+
+      def definite_article
+        case locale
+        when "en"
+          "the"
+        when "fr"
+          if gender == :f
+            "la"
+          else
+            "le"
+          end
+        else
+          raise "Unknown locale: #{locale.inspect}"
+        end
+      end
     end
   end
 end

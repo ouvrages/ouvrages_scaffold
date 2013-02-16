@@ -18,6 +18,10 @@ fr:
     new:
       title: <%= gender_mf("Nouveau", "Nouvelle") %> <%= translated %>
       back: 
+      
+    form:
+      submit: Créer <%= definite_article %> <%= translated %>
+      cancel: Annuler
 
   navigation:
     <%= plural_table_name %>: <%= capitalize_first_letter(plural(translated)) %>

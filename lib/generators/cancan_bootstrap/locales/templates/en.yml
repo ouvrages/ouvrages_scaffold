@@ -20,5 +20,9 @@ en:
       title: New <%= translated %>
       back: 
 
+    form:
+      submit: Create <%= definite_article %> <%= translated %>
+      cancel: Cancel
+
   navigation:
     <%= plural_table_name %>: <%= capitalize_first_letter(plural(translated)) %>
