@@ -25,7 +25,7 @@ en:
       title: New <%= translated %>
 
     form:
-      submit: Create <%= definite_article %> <%= translated %>
+      submit: Save <%= definite_article %> <%= translated %>
       cancel: Cancel
       
     show:

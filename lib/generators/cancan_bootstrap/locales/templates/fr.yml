@@ -25,7 +25,7 @@ fr:
       title: <%= gender_mf("Nouveau", "Nouvelle") %> <%= translated %>
       
     form:
-      submit: Créer <%= definite_article %> <%= translated %>
+      submit: Enregistrer <%= definite_article %> <%= translated %>
       cancel: Annuler
 
     show:
