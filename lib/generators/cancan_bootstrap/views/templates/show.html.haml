@@ -1,13 +1,15 @@
 - content_for(:title, t(".title", name: @<%= resource_name %>.id))
 - add_crumb content_for(:title)
 
-<%- columns.each do |column| -%>
-%dl.dl-horizontal
-  %dt= @<%= resource_name %>.class.human_attribute_name(:<%= column.name %>)
-  %dd= @<%= resource_name %>.<%= column.name %>
-<%- end -%>
+.row-fluid
+  .span12
+    <%- columns.each do |column| -%>
+    %dl.dl-horizontal
+      %dt= @<%= resource_name %>.class.human_attribute_name(:<%= column.name %>)
+      %dd= @<%= resource_name %>.<%= column.name %>
+    <%- end -%>
 
-.form-actions
-  = link_to t('.back'), <%= controller_routing_path %>_path, :class => 'btn'
-  = link_to t('.edit'), edit_<%= singular_controller_routing_path %>_path(@<%= resource_name %>), :class => 'btn' if can? :update, @<%= resource_name %>
-  = link_to t('.destroy'), <%= singular_controller_routing_path %>_path(@<%= resource_name %>), :method => "delete", :confirm => t('.confirm'), :class => 'btn btn-danger' if can? :destroy, @<%= resource_name %>
+    .form-actions
+      = link_to t('.back'), <%= controller_routing_path %>_path, :class => 'btn'
+      = link_to t('.edit'), edit_<%= singular_controller_routing_path %>_path(@<%= resource_name %>), :class => 'btn' if can? :update, @<%= resource_name %>
+      = link_to t('.destroy'), <%= singular_controller_routing_path %>_path(@<%= resource_name %>), :method => "delete", :confirm => t('.confirm'), :class => 'btn btn-danger' if can? :destroy, @<%= resource_name %>

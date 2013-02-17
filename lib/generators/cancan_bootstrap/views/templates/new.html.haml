@@ -1,4 +1,6 @@
 - content_for :title, t('.title')
 - add_crumb content_for(:title)
 
-= render :partial => "form"
+.row-fluid
+  .span12
+    = render :partial => "form"

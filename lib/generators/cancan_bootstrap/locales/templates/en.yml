@@ -17,6 +17,7 @@ en:
       destroy: &destroy Delete
       confirm: &confirm <%= capitalize_first_letter(the_resource) %> will by deleted. Are you sure?
       new: Add <%= a_resource %>
+      empty: The list is empty.
 
     edit:
       title: "Modification <%= of_resource %> %{name}"
