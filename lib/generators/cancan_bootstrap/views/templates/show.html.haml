@@ -1,7 +1,7 @@
 - content_for(:title, t(".title", name: @<%= resource_name %>.id))
 - add_crumb content_for(:title)
 
-.row-fluid
+.row
   .span12
     <%- columns.each do |column| -%>
     %dl.dl-horizontal
