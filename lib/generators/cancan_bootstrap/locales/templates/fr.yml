@@ -1,4 +1,9 @@
 fr:
+  grammar:
+<%- grammar_values.each do |name, value| -%>
+    <%= name %>: <%= value %>
+<%- end -%>
+
   activerecord:
     models:
       <%= singular_table_name %>: <%= capitalize_first_letter resource %>

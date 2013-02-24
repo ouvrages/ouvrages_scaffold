@@ -15,25 +15,15 @@ module CancanBootstrap
         
         locales.each do |locale|
           @locale = locale
-          english = singular_table_name.humanize.downcase
-          @gender = :m
-          @translated = english
-          if locale != "en"
-            data = fetch_translation(english)
-            if data["term0"]
-              translations = data["term0"]["PrincipalTranslations"] || data["term0"]["Entries"]
-              translation = translations["0"]["FirstTranslation"]
-              @translated = translation["term"]
-              if translation["POS"] == "nf"
-                @gender = :f
-              end
-            end
-          end
-          template "#{locale}.yml", File.join('config/locales', "#{singular_table_name}.#{locale}.yml")
+          template "#{locale}.yml", locale_filename(locale)
         end
       end
       
       protected
+
+      def locale_filename(locale)
+        File.join('config/locales', "#{singular_table_name}.#{locale}.yml")
+      end
       
       def columns
         begin
@@ -61,21 +51,14 @@ module CancanBootstrap
           when "Id" then "ID"
           when "Created at" then "Creation date"
           when "Updated at" then "Last update"
-          else string.humanize
+          else ""
           end
         when "fr"
           case string
           when "Id" then "Identifiant"
           when "Created at" then "Date de création"
           when "Updated at" then "Dernière mise à jour"
-          else
-            key = ["string_translation", string]
-            default = Rails.cache.read(key)
-            default = string if default.blank?
-            translated = ask "Translate #{string.inspect} in French (case is important) [#{default}]?"
-            translated = default if translated.blank?
-            Rails.cache.write(key, translated)
-            translated
+          else ""
           end
         else
           raise "Unknown locale: #{locale.inspect}"
@@ -83,95 +66,79 @@ module CancanBootstrap
         result.force_encoding('ASCII-8BIT') # template is loaded as ASCII so it throws and incompatibility error
       end
       
-      def translate_string(string, default = string)
-        data = fetch_translation(string)
-        if data["term0"]
-          translations = data["term0"]["PrincipalTranslations"] || data["term0"]["Entries"]
-          translation = translations["0"]["FirstTranslation"]
-          translated = translation["term"]
-          translated
-        else
-          default
-        end
-      end
-      
       def plural(string)
         string.pluralize
       end
       
       def capitalize_first_letter(string)
-        string[0].capitalize + string[1..-1]
-      end
-      
-      def resource
-        translated
-      end
-      
-      def resources
-        translated.pluralize
-      end
-      
-      def the_resource
-        case locale
-        when "en"
-          "the #{resource}"
-        when "fr"
-          if start_with_vowel?
-            "l'#{resource}"
-          elsif gender == :f
-            "la #{resource}"
-          else
-            "le #{resource}"
-          end
+        if string.present?
+          string[0].capitalize + string[1..-1]
         else
-          raise "Unknown locale: #{locale.inspect}"
+          ""
         end
       end
       
-      def of_resource
-        case locale
+      def grammar(locale, base, hint = nil)
+        case locale.to_s
+        when "code"
+          base
         when "en"
-          "of #{resource}"
-        when "fr"
-          if start_with_vowel?
-            "de l'#{resource}"
-          elsif gender == :f
-            "de la #{resource}"
-          else
-            "du #{resource}"
-          end
+          base.gsub('_', ' ')
         else
-          raise "Unknown locale: #{locale.inspect}"
+          value = I18n.t("grammar.#{base}", :default => "", :locale => locale)
+          if value.blank?
+            value = ask("#{base.inspect} in #{locale}#{" (#{hint})" if hint.present?}:")
+            I18n.backend.store_translations(locale, {"grammar" => {base => value}})
+          end
+          value.force_encoding('ASCII-8BIT')
         end
+      end
+      
+      def resource(locale = @locale)
+        grammar(locale, singular_table_name)
+      end
+      
+      def resources(locale = @locale)
+        grammar(locale, plural_table_name)
+      end
+      
+      def the_resource(locale = @locale)
+        base = "the_#{resource(:code)}"
+        grammar(locale, base)
+      end
+      
+      def of_resource(locale = @locale)
+        base = "of_#{resource(:code)}"
+        grammar(locale, base, "as in 'modification of XXX named YYY'")
       end
       
       def start_with_vowel?
-        %w(a e i o u ).include?(translated[0])
+        %w(a e i o u ).include?(singular_table_name[0])
       end
       
-      def a_resource
-        case locale
-        when "en"
-          if start_with_vowel?
-            "an #{resource}"
-          else
-            "a #{resource}"
-          end
-        when "fr"
-          if gender == :f
-            "une #{resource}"
-          else
-            "un #{resource}"
-          end
+      def a_resource(locale = @locale)
+        if start_with_vowel?
+          base = "an_#{resource(:code)}"
         else
-          raise "Unknown locale: #{locale.inspect}"
+          base = "a_#{resource(:code)}"
+        end
+        grammar(locale, base)
+      end
+      
+      def resource_gender(locale = @locale)
+        grammar(locale, "#{resource(:code)}_gender", "n|m|f")
+      end
+      
+      def grammar_values
+        %w( resource resources a_resource the_resource of_resource resource_gender ).map do |name|
+          [send(name, :code), send(name)]
         end
       end
-        
       
       def gender_select(values)
-        values[gender]
+        values[resource_gender.to_sym]
       end
+      
     end
   end
 end
