@@ -68,7 +68,14 @@ module CancanBootstrap
           when "Id" then "Identifiant"
           when "Created at" then "Date de création"
           when "Updated at" then "Dernière mise à jour"
-          else translate_string(string, string.humanize)
+          else
+            key = ["string_translation", string]
+            default = Rails.cache.read(key)
+            default = string if default.blank?
+            translated = ask "Translate #{string.inspect} in French (case is important) [#{default}]?"
+            translated = default if translated.blank?
+            Rails.cache.write(key, translated)
+            translated
           end
         else
           raise "Unknown locale: #{locale.inspect}"
