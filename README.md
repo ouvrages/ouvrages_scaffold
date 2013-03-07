@@ -1,4 +1,4 @@
-# Rails::Cancan::Bootstrap::Scaffold
+# Ouvrages Scaffold
 
 Rails generators that produce HAML views to be used with Bootstrap and Cancan.
 
