@@ -1,22 +1,22 @@
 require 'rails/generators'
 
-module CancanBootstrap
+module Ouvrages
   module Generators
     class ScaffoldGenerator < ::Rails::Generators::NamedBase
       def generate_controller
-        invoke "cancan_bootstrap:controller"
+        invoke "ouvrages:controller"
       end
       
       def generate_routes
-        invoke "cancan_bootstrap:routes"
+        invoke "ouvrages:routes"
       end
       
       def generate_views
-        invoke "cancan_bootstrap:views"
+        invoke "ouvrages:views"
       end
 
       def generate_locales
-        invoke "cancan_bootstrap:locales"
+        invoke "ouvrages:locales"
       end
     end
   end

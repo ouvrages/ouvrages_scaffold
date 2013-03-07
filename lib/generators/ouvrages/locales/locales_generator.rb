@@ -2,7 +2,7 @@
 
 require 'rails/generators/resource_helpers'
 
-module CancanBootstrap
+module Ouvrages
   module Generators
     class LocalesGenerator < Rails::Generators::NamedBase
       include Rails::Generators::ResourceHelpers

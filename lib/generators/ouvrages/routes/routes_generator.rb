@@ -1,6 +1,6 @@
 require 'rails/generators'
 
-module CancanBootstrap
+module Ouvrages
   module Generators
     class RoutesGenerator < ::Rails::Generators::NamedBase
       def add_route

@@ -1,7 +1,7 @@
 require 'rails/generators'
 require 'rails/generators/generated_attribute'
 
-module CancanBootstrap
+module Ouvrages
   module Generators
     class ViewsGenerator < ::Rails::Generators::Base
       source_root File.expand_path('../templates', __FILE__)

@@ -1,12 +1,12 @@
 # Rails::Cancan::Bootstrap::Scaffold
 
-Rails generators that produce standard code for Bootstrap and Cancan.
+Rails generators that produce HAML views to be used with Bootstrap and Cancan.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'rails-cancan-bootstrap-scaffold'
+    gem 'ouvrages_scaffold'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    gem install rails-cancan-bootstrap-scaffold
+    gem install ouvrages_scaffold
 
 ## Usage
 
@@ -25,19 +25,19 @@ First generate your model with Rails and migrate:
 
 Then generate the scaffold with:
 
-    rails g cancan_bootstrap:scaffold Post
+    rails g ouvrages:scaffold Post
 
 You can also run the generators individually:
 
-    rails g cancan_bootstrap:controller Post
-    rails g cancan_bootstrap:routes Post
-    rails g cancan_bootstrap:views Post
+    rails g ouvrages:controller Post
+    rails g ouvrages:routes Post
+    rails g ouvrages:views Post
 
 If you want to change the model and regenerate the scaffold, you must update the database and call the generator again (you only need to update the views):
 
     rails g migration AddActiveToPost active:boolean
     rake db:migrate
-    rails g cancan_bootstrap:views Post
+    rails g ouvrages:views Post
     
 ## Contributing
 

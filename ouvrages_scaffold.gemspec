@@ -1,15 +1,15 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'rails-cancan-bootstrap-scaffold/version'
+require 'ouvrages_scaffold/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "rails-cancan-bootstrap-scaffold"
-  gem.version       = Rails::Cancan::Bootstrap::Scaffold::VERSION
+  gem.name          = "ouvrages_scaffold"
+  gem.version       = OuvragesScaffold::VERSION
   gem.authors       = ["Ouvrages"]
   gem.email         = ["contact@ouvrages-web.fr"]
-  gem.description   = %q{Bootstrap & cancan generators for Rails}
-  gem.summary       = %q{Rails generators that produce standard code for Bootstrap and Cancan.}
+  gem.description   = %q{Rails scaffold in HAML, using cancan and bootstrap}
+  gem.summary       = %q{Rails generators that produce HAML views to be used with Bootstrap and Cancan.}
   gem.homepage      = "https://github.com/ouvrages/rails-cancan-bootstrap-scaffold"
 
   gem.files         = `git ls-files`.split($/)
