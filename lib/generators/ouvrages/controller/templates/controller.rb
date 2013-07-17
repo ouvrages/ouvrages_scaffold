@@ -71,7 +71,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     @<%= orm_instance.destroy %>
 
     respond_to do |format|
-      format.html { redirect_to <%= index_helper %>_url }
+      format.html { redirect_to <%= index_helper %>_url, flash: {success: t("<%= plural_table_name %>.removed")} }
       format.json { head :no_content }
     end
   end

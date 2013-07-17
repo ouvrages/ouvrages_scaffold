@@ -38,6 +38,7 @@ en:
 
     created: <%= capitalize_first_letter the_resource %> was successfully created.
     updated: <%= capitalize_first_letter the_resource %> was successfully updated.
+    removed: <%= capitalize_first_letter the_resource %> was successfully removed.
       
   navigation:
     <%= plural_table_name %>: <%= capitalize_first_letter(resources) %>

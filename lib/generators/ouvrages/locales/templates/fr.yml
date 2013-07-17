@@ -43,6 +43,7 @@ fr:
       
     created: <%= capitalize_first_letter the_resource %> a été créé.
     updated: <%= capitalize_first_letter the_resource %> a été <%= gender_select(m: "modifié", f: "modifiée") %>.
+    removed: <%= capitalize_first_letter the_resource %> a été <%= gender_select(m: "supprimé", f: "supprimée") %>.
     
   navigation:
     <%= plural_table_name %>: <%= capitalize_first_letter(resources) %>
