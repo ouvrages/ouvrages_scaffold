@@ -6,39 +6,30 @@ class <%= controller_class_name %>Controller < ApplicationController
     add_crumb t("navigation.<%= plural_table_name %>"), <%= plural_table_name %>_path
   end
 
-  # GET <%= route_url %>
-  # GET <%= route_url %>.json
   def index
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: <%= "@#{plural_table_name}" %> }
     end
   end
 
-  # GET <%= route_url %>/1
-  # GET <%= route_url %>/1.json
   def show
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: <%= "@#{singular_table_name}" %> }
     end
   end
 
-  # GET <%= route_url %>/new
-  # GET <%= route_url %>/new.json
   def new
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: <%= "@#{singular_table_name}" %> }
     end
   end
 
-  # GET <%= route_url %>/1/edit
   def edit
   end
 
-  # POST <%= route_url %>
-  # POST <%= route_url %>.json
   def create
     respond_to do |format|
       if @<%= orm_instance.save %>
@@ -51,8 +42,6 @@ class <%= controller_class_name %>Controller < ApplicationController
     end
   end
 
-  # PATCH/PUT <%= route_url %>/1
-  # PATCH/PUT <%= route_url %>/1.json
   def update
     respond_to do |format|
       if @<%= orm_instance.update_attributes("params[:#{singular_table_name}]") %>
@@ -65,8 +54,6 @@ class <%= controller_class_name %>Controller < ApplicationController
     end
   end
 
-  # DELETE <%= route_url %>/1
-  # DELETE <%= route_url %>/1.json
   def destroy
     @<%= orm_instance.destroy %>
 
