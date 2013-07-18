@@ -9,21 +9,21 @@ class <%= controller_class_name %>Controller < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json { render json: <%= "@#{plural_table_name}" %> }
+      # format.json { render json: <%= "@#{plural_table_name}" %> }
     end
   end
 
   def show
     respond_to do |format|
       format.html
-      format.json { render json: <%= "@#{singular_table_name}" %> }
+      # format.json { render json: <%= "@#{singular_table_name}" %> }
     end
   end
 
   def new
     respond_to do |format|
       format.html
-      format.json { render json: <%= "@#{singular_table_name}" %> }
+      # format.json { render json: <%= "@#{singular_table_name}" %> }
     end
   end
 
@@ -34,10 +34,10 @@ class <%= controller_class_name %>Controller < ApplicationController
     respond_to do |format|
       if @<%= orm_instance.save %>
         format.html { redirect_to @<%= singular_table_name %>, flash: {success: t("<%= plural_table_name %>.created")} }
-        format.json { render json: <%= "@#{singular_table_name}" %>, status: :created, location: <%= "@#{singular_table_name}" %> }
+        # format.json { render json: <%= "@#{singular_table_name}" %>, status: :created, location: <%= "@#{singular_table_name}" %> }
       else
         format.html { render action: "new" }
-        format.json { render json: <%= "@#{orm_instance.errors}" %>, status: :unprocessable_entity }
+        # format.json { render json: <%= "@#{orm_instance.errors}" %>, status: :unprocessable_entity }
       end
     end
   end
@@ -46,10 +46,10 @@ class <%= controller_class_name %>Controller < ApplicationController
     respond_to do |format|
       if @<%= orm_instance.update_attributes("params[:#{singular_table_name}]") %>
         format.html { redirect_to @<%= singular_table_name %>, flash: {success: t("<%= plural_table_name %>.updated")} }
-        format.json { head :no_content }
+        # format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: <%= "@#{orm_instance.errors}" %>, status: :unprocessable_entity }
+        # format.json { render json: <%= "@#{orm_instance.errors}" %>, status: :unprocessable_entity }
       end
     end
   end
@@ -59,7 +59,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to <%= index_helper %>_url, flash: {success: t("<%= plural_table_name %>.removed")} }
-      format.json { head :no_content }
+      # format.json { head :no_content }
     end
   end
 end
