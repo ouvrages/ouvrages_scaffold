@@ -1,5 +1,7 @@
 - content_for :title, t('.title')
 
+- @<%= plural_resource_name %> = @<%= plural_resource_name %>.paginate(page: params[:page], per_page: 50)
+
 .row
   .span12
     - if @<%= plural_resource_name %>.blank?
@@ -22,5 +24,7 @@
                 = link_to t('.show'), <%= singular_controller_routing_path %>_path(<%= resource_name %>), :class => 'btn btn-mini'
                 = link_to t('.edit'), edit_<%= singular_controller_routing_path %>_path(<%= resource_name %>), :class => 'btn btn-mini' if can? :update, <%= resource_name %>
                 = link_to t('.destroy'), <%= singular_controller_routing_path %>_path(<%= resource_name %>), :method => :delete, :confirm => t('.confirm'), :class => 'btn btn-mini btn-danger' if can? :destroy, <%= resource_name %>
+
+      = will_paginate @<%= plural_resource_name %>, renderer: BootstrapPagination::Rails
 
     = link_to t('.new'), new_<%= singular_controller_routing_path %>_path, :class => 'btn btn-primary' if can? :create, <%= model_name %>
