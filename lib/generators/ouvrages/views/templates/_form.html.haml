@@ -1,8 +1,11 @@
 = bootstrap_form_for @<%= resource_name %>, :html => { :class => 'form-horizontal' } do |f|
-  <%- columns.each do |column| -%>
-  = f.<%= column.field_type %> :<%= column.name %>
-  <%- end -%>
-  
-  .form-actions
-    = f.submit t('.submit'), :class => 'btn btn-primary'
-    = link_to t('.cancel'), <%= controller_routing_path %>_path, :class => 'btn'
+  .row
+    .span12.text-right
+      = f.submit t('.submit'), :class => 'btn btn-primary'
+      = link_to t('.cancel'), <%= controller_routing_path %>_path, :class => 'btn'
+
+  .row
+    .span12
+      <%- columns.each do |column| -%>
+      = f.<%= column.field_type %> :<%= column.name %>
+      <%- end -%>
