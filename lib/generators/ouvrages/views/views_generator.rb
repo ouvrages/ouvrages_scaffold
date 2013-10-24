@@ -19,6 +19,10 @@ module Ouvrages
         generate_views
       end
 
+      def add_to_navbar
+        append_to_file "app/views/layouts/_navbar.html.haml", "= render '#{plural_resource_name}/nav'\n"
+      end
+
       protected
 
       def initialize_views_variables
@@ -76,7 +80,9 @@ module Ouvrages
           "new.html.#{ext}"                   => File.join('app/views', @controller_file_path, "new.html.#{ext}"),
           "edit.html.#{ext}"                  => File.join('app/views', @controller_file_path, "edit.html.#{ext}"),
           "#{form_builder}_form.html.#{ext}"  => File.join('app/views', @controller_file_path, "_form.html.#{ext}"),
-          "show.html.#{ext}"                  => File.join('app/views', @controller_file_path, "show.html.#{ext}")}
+          "show.html.#{ext}"                  => File.join('app/views', @controller_file_path, "show.html.#{ext}"),
+          "_nav.html.#{ext}"                  => File.join('app/views', @controller_file_path, "_nav.html.#{ext}"),
+        }
         selected_views = views
         options.engine == generate_erb(selected_views)
       end

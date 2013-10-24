@@ -1,0 +1,3 @@
+- if can? :read, <%= model_name %>
+  %li{class: params[:controller] == "<%= plural_resource_name %>" ? "active" : ""}
+    %a{href: <%= plural_resource_name %>_path}= t("navigation.<%= plural_resource_name %>")
