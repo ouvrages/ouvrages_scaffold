@@ -36,7 +36,7 @@ en:
       confirm: *confirm
       back: Back
 
-    created: <%= capitalize_first_letter the_resource %> was successfully created.
+    created: <%= capitalize_first_letter the_resource %> was successfully added.
     updated: <%= capitalize_first_letter the_resource %> was successfully updated.
     removed: <%= capitalize_first_letter the_resource %> was successfully removed.
       

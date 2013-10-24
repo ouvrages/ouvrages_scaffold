@@ -41,7 +41,7 @@ fr:
       confirm: *confirm
       back: Retour
       
-    created: <%= capitalize_first_letter the_resource %> a été créé.
+    created: <%= capitalize_first_letter the_resource %> a été ajouté.
     updated: <%= capitalize_first_letter the_resource %> a été <%= gender_select(m: "modifié", f: "modifiée") %>.
     removed: <%= capitalize_first_letter the_resource %> a été <%= gender_select(m: "supprimé", f: "supprimée") %>.
     
