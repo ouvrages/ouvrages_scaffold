@@ -21,7 +21,7 @@ fr:
       edit: &edit Modifier
       destroy: &destroy Supprimer
       confirm: &confirm <%= capitalize_first_letter(the_resource) %> sera <%= gender_select(m: "supprimé", f: "supprimée") %>. Êtes vous sûr ?
-      new: Créer <%= a_resource %>
+      new: Ajouter <%= a_resource %>
       empty: La liste est vide.
 
     edit:
