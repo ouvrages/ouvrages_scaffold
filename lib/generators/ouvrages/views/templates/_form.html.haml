@@ -1,4 +1,6 @@
 = bootstrap_form_for @<%= resource_name %>, :html => { :class => 'form-horizontal' } do |f|
+  = hidden_field_tag :return_url, params[:return_url]
+
   <%- columns.each do |column| -%>
   = f.<%= column.field_type %> :<%= column.name %>
   <%- end -%>
