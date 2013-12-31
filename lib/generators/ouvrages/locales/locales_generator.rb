@@ -8,7 +8,7 @@ module Ouvrages
       include Rails::Generators::ResourceHelpers
       source_root File.expand_path('../templates', __FILE__)
 
-      argument :locales, :type => :array, :default => %w( en fr ), :banner => "locale"
+      class_option :locales, :type => :array, :default => %w( en fr ), :desc => "Locales to generate"
       
       def create_locale_files
         require 'httparty'
@@ -20,6 +20,10 @@ module Ouvrages
       end
       
       protected
+
+      def locales
+        options[:locales]
+      end
 
       def locale_filename(locale)
         File.join('config/locales', "#{singular_table_name}.#{locale}.yml")

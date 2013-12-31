@@ -3,6 +3,8 @@ require 'rails/generators'
 module Ouvrages
   module Generators
     class ScaffoldGenerator < ::Rails::Generators::NamedBase
+      class_option :locales, :type => :array, :default => %w( en fr ), :desc => "Locales to generate"
+
       def generate_controller
         invoke "ouvrages:controller"
       end
@@ -16,7 +18,7 @@ module Ouvrages
       end
 
       def generate_locales
-        invoke "ouvrages:locales"
+        invoke "ouvrages:locales", [name, "--locales=#{options[:locales].join(",")}"]
       end
     end
   end
