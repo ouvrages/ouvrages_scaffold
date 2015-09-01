@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
   
   gem.add_dependency 'bootstrap_forms'
   gem.add_dependency 'httparty'
-  gem.add_dependency 'will_paginate-bootstrap'
+  gem.add_dependency 'will_paginate-bootstrap', '0.2.5'
   gem.add_dependency 'will-paginate-i18n'
 end
 
