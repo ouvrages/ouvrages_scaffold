@@ -40,7 +40,7 @@ class <%= controller_class_name %>Controller < ApplicationController
 
   def update
     respond_to do |format|
-      if @<%= orm_instance.update_attributes("params[:#{singular_table_name}]") %>
+      if @<%= orm_instance.update("params[:#{singular_table_name}]") %>
         format.html { redirect_to return_url(@<%= singular_table_name %>), flash: {success: t("<%= plural_table_name %>.updated")} }
         # format.json { head :no_content }
       else
