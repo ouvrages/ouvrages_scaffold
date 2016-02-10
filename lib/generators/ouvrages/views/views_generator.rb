@@ -19,10 +19,6 @@ module Ouvrages
         generate_views
       end
 
-      def add_to_navbar
-        append_to_file "app/views/layouts/_navbar.html.haml", "= render '#{plural_resource_name}/nav'\n"
-      end
-
       protected
 
       def initialize_views_variables
