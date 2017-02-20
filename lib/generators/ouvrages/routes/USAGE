@@ -1,0 +1,5 @@
+Description:
+    Generate route to the controller
+
+Example:
+    `rails generate cancan_bootstrap:routes User`

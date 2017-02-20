@@ -1,0 +1,10 @@
+id: Identifiant
+created_at: Date de création
+updated_at: Dernière mise à jour
+first_name: Prénom
+last_name: Nom
+name: Nom
+title: Titre
+description: Description
+content: Contenu
+text: Texte

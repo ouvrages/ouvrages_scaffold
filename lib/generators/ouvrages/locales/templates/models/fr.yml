@@ -1,0 +1,18 @@
+fr:
+  grammar:
+<%- grammar_values.each do |name, value| -%>
+    <%= name %>: <%= value %>
+<%- end -%>
+
+  activerecord:
+    models:
+      <%= singular_table_name %>: <%= capitalize_first_letter resource %>
+    attributes:
+      <%= singular_table_name %>:
+<%- attributes.each do |attribute| -%>
+        <%= attribute.name %>: <%= translate(attribute.name) %>
+<%- end -%>
+<%- if blocks? -%>
+        blocks: Blocs
+<%- end -%>
+

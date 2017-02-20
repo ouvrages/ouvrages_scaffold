@@ -1,0 +1,6 @@
+Description:
+    Generate locales for the view and the model. Only french and english are supported right now.
+
+Example:
+    `rails generate cancan_bootstrap:locales`
+

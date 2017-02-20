@@ -1,0 +1,57 @@
+fr:
+  admin:
+    <%= plural_table_name %>:
+  <% unless singleton? -%>
+      index:
+        title: Liste des <%= resources %>
+        actions: Actions
+        show: Voir
+        edit: &edit Modifier
+        destroy: &destroy Supprimer
+        confirm: &confirm <%= capitalize_first_letter(the_resource) %> sera <%= gender_select(m: "supprimé", f: "supprimée") %>. Êtes vous sûr ?
+        new: Ajouter <%= a_resource %>
+        empty: La liste est vide.
+  <% end -%>
+      edit:
+  <% if singleton? -%>
+        title: "Modification <%= of_resource %>"
+  <% else -%>
+        title: "Modification <%= of_resource %> %{name}"
+  <% end -%>
+        cancel: Annuler
+        submit: Enregistrer <%= the_resource %>
+  <% unless singleton? -%>
+      new:
+        title: <%= gender_select(m: "Nouveau", f: "Nouvelle") %> <%= resource %>
+        cancel: Annuler
+        submit: Enregistrer <%= the_resource %>
+  <% end -%>
+  <% if show? -%>
+      show:
+        title: "<%= capitalize_first_letter(resource) %> %{name}"
+        edit: *edit
+        destroy: *destroy
+        confirm: *confirm
+        back: Retour
+  <% end -%>
+      form:
+  <% if singleton? -%>
+        title: "<%= capitalize_first_letter(resource) %>"
+  <% else -%>
+        title: "<%= capitalize_first_letter(resource) %> %{name}"
+  <% end -%>
+        cancel: Annuler
+        submit: Enregistrer <%= the_resource %>
+        
+  <% unless singleton? -%>
+      created: <%= capitalize_first_letter the_resource %> a été ajouté.
+      removed: <%= capitalize_first_letter the_resource %> a été <%= gender_select(m: "supprimé", f: "supprimée") %>.
+  <% end -%>
+      updated: <%= capitalize_first_letter the_resource %> a été <%= gender_select(m: "modifié", f: "modifiée") %>.
+      
+  navigation:
+<% if singleton? -%>
+    <%= plural_table_name %>: <%= capitalize_first_letter(resource) %>
+<% else -%>
+    <%= plural_table_name %>: <%= capitalize_first_letter(resources) %>
+<% end %>

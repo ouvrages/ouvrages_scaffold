@@ -1,0 +1,43 @@
+.row
+  .col-xs-12.col-md-6
+    %h2= t(".title", name: @<%= resource_name %>.try(:to_label).presence || @<%= resource_name %>.id)
+  .col-xs-12.col-md-6
+    .pull-right
+<% unless singleton? -%>
+<% if admin_enabled?  -%>
+      = link_to t('.cancel'), admin_<%= controller_routing_path %>_path, :class => 'btn'
+<% else -%>
+      = link_to t('.cancel'), <%= controller_routing_path %>_path, :class => 'btn'
+<% end -%>
+<% end -%>
+      %button{type: "submit", class: 'btn btn-primary', form: "<%= resource_name %>_form"}= t(".submit")
+.row
+  .col-xs-12
+<% if admin_enabled?  -%>
+    = bootstrap_form_for [:admin, @<%= resource_name %>], :html => { :class => 'form', id: "<%= resource_name %>_form" } do |f|
+<% else -%>
+    = bootstrap_form_for @<%= resource_name %>, :html => { :class => 'form', id: "<%= resource_name %>_form" } do |f|
+<% end -%>
+      = hidden_field_tag :return_url, params[:return_url]
+
+<%- attributes.each do |attribute| -%>
+<%- if attribute.localized? -%>
+      = localized_tabs do |locale|
+        = f.<%= "localized_#{field_type(attribute)}" %> "<%= attribute.name %>_#{locale}"
+<%- else -%>
+      = f.<%= field_type(attribute) %> :<%= attribute.name %>
+<%- end -%>
+<%- end -%>
+<%- if blocks? -%>
+      = f.blocks_form
+<%- end -%>
+
+    .pull-right
+<% unless singleton? -%>
+<% if admin_enabled?  -%>
+      = link_to t('.cancel'), admin_<%= controller_routing_path %>_path, :class => 'btn'
+<% else -%>
+      = link_to t('.cancel'), <%= controller_routing_path %>_path, :class => 'btn'
+<% end -%>
+<% end -%>
+      %button{type: "submit", class: 'btn btn-primary', form: "<%= resource_name %>_form"}= t(".submit")

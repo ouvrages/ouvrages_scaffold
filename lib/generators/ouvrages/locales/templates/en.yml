@@ -1,0 +1,56 @@
+en:
+  <%= plural_table_name %>:
+<% unless singleton? -%>
+    index:
+      title: List of <%= resources %>
+      actions: Actions
+      show: Show
+      edit: &edit Edit
+      destroy: &destroy Delete
+      confirm: &confirm <%= capitalize_first_letter(the_resource) %> will by deleted. Are you sure?
+      new: Add <%= a_resource %>
+      empty: The list is empty.
+<% end -%>
+    edit:
+<% if singleton? -%>
+      title: "Modification <%= of_resource %>"
+<% else -%>
+      title: "Modification <%= of_resource %> %{name}"
+<% end -%>
+      submit: Save <%= the_resource %>
+      cancel: Cancel
+<% unless singleton? -%>
+    new:
+      title: New <%= resource %>
+      submit: Save <%= the_resource %>
+      cancel: Cancel
+<% end -%>
+<% if show? -%>
+    show:
+      title: "<%= capitalize_first_letter(resource) %> %{name}"
+      edit: *edit
+      destroy: *destroy
+      confirm: *confirm
+      back: Back
+<% end -%>
+    form:
+<% if singleton? -%>
+      title: "<%= capitalize_first_letter(resource) %>"
+<% else -%>
+      title: "<%= capitalize_first_letter(resource) %> %{name}"
+<% end -%>
+      cancel: Cancel
+      submit: Save <%= the_resource %>
+
+<% unless singleton? -%>
+    created: <%= capitalize_first_letter the_resource %> was successfully added.
+    removed: <%= capitalize_first_letter the_resource %> was successfully removed.
+<% end -%>
+    updated: <%= capitalize_first_letter the_resource %> was successfully updated.
+    
+  navigation:
+<% if singleton? -%>
+    <%= plural_table_name %>: <%= capitalize_first_letter(resource) %>
+<% else -%>
+    <%= plural_table_name %>: <%= capitalize_first_letter(resources) %>
+<% end -%>

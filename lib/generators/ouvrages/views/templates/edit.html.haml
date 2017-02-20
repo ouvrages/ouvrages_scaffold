@@ -1,0 +1,2 @@
+- content_for :title, t('.title', name: @<%= resource_name %>.try(:to_label).presence || @<%= resource_name %>.id)
+= render :partial => "form"
