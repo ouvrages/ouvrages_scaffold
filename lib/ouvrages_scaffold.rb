@@ -1,0 +1,3 @@
+module OuvragesScaffold
+  # Your code goes here...
+end
