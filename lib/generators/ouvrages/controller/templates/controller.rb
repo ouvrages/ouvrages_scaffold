@@ -53,7 +53,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def create
     respond_to do |format|
       if @<%= orm_instance.save %>
-        format.html { redirect_to return_url(@<%= singular_table_name %>), flash: {success: t("<%= plural_table_name %>.created")} }
+        format.html { redirect_to return_url(@<%= singular_table_name %>), flash: {success: t("<%= admin_enabled? ? 'admin.' : ''%><%= plural_table_name %>.created")} }
 <% if options[:json] -%>
         format.json { render json: <%= "@#{singular_table_name}" %>, status: :created, location: <%= "@#{singular_table_name}" %> }
 <% end -%>
@@ -70,7 +70,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   def update
     respond_to do |format|
       if @<%= orm_instance.update("#{singular_table_name}_params") %>
-        format.html { redirect_to return_url(@<%= singular_table_name %>), flash: {success: t("<%= plural_table_name %>.updated")} }
+        format.html { redirect_to return_url(@<%= singular_table_name %>), flash: {success: t("<%= admin_enabled? ? 'admin.' : ''%><%= plural_table_name %>.updated")} }
 <% if options[:json] -%>
         format.json { head :no_content }
 <% end -%>
@@ -88,7 +88,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     @<%= orm_instance.destroy %>
 
     respond_to do |format|
-      format.html { redirect_to return_url(@<%= singular_table_name %>), flash: {success: t("<%= plural_table_name %>.removed")} }
+      format.html { redirect_to return_url(@<%= singular_table_name %>), flash: {success: t("<%= admin_enabled? ? 'admin.' : ''%><%= plural_table_name %>.removed")} }
 <% if options[:json] -%>
       format.json { head :no_content }
 <% end -%>
