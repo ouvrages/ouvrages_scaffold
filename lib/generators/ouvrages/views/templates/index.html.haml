@@ -23,12 +23,19 @@
             %th= <%= resource_name.classify %>.human_attribute_name(:<%= attribute.name %>)
             <%- end -%>
             %th= t('.actions')
-        %tbody
-          - @<%= plural_resource_name %>.each do |<%= resource_name %>|
+        <%- if sortable? -%>
+          - sortable_url = sort_<%= controller_routing_path %>_url
+        <%- end -%>
+        %tbody{data: { sortable_url: sortable_url } }
+          - @<%= plural_resource_name %>.<%= (sortable? ? 'sorted_by_position.' : nil) %>each do |<%= resource_name %>|
+            - data = {}
+            <%- if sortable? -%>
+            - data[:sortable_position_id] = <%= resource_name %>.id
+            <%- end -%>
             <%- if attributes.map(&:name).include?("active") -%>
-            %tr{class: <%= resource_name %>.active? ? nil : "text-muted"}
+            %tr{class: <%= resource_name %>.active? ? nil : "text-muted", data: data}
             <%- else -%>
-            %tr
+            %tr{data: data}
             <%- end -%>
               <%- attributes.each do |attribute| -%>
               %td= <%= resource_name %>.<%= attribute.name %>

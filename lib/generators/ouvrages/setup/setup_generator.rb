@@ -14,6 +14,7 @@ module Ouvrages
           gem 'bootstrap-sass', '~> 3.3.6'
           gem 'bootstrap_form'
           gem 'jquery-rails'
+          gem 'sortable-rails'
         else
           append_to_file ENV['BUNDLE_GEMFILE'] do
 <<-EOF
@@ -23,6 +24,7 @@ gem 'cancancan'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap_form'
 gem 'jquery-rails'
+gem 'sortable-rails'
 EOF
           end
         end
@@ -65,6 +67,7 @@ EOF
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require sortable-rails-jquery
 EOF
           end
         else
@@ -73,6 +76,7 @@ EOF
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require sortable-rails-jquery
 EOF
           end
         end

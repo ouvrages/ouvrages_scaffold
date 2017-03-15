@@ -8,6 +8,7 @@ module Ouvrages
       source_root File.expand_path('../templates', __FILE__)
 
       argument :attributes, type: :array, default: [], banner: "field[:type][:index] field[:type][:index]"
+      class_option :sortable, type: :boolean, default: false, desc: "Sortable list"
 
       def self.next_migration_number(dirname)
         next_migration_number = current_migration_number(dirname) + 1
@@ -18,7 +19,15 @@ module Ouvrages
         migration_template "migration.rb", "db/migrate/create_#{table_name}.rb"
       end
 
+      def add_position_to_table
+        migration_template "position.rb", "db/migrate/add_position_to_#{table_name}.rb"
+      end
+
       protected
+
+      def sortable?
+        options[:sortable]
+      end
 
       def localized_attributes
         attributes.select { |attr| attr.localized? }

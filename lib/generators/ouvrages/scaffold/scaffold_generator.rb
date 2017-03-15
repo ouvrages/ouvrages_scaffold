@@ -35,6 +35,10 @@ module Ouvrages
         invoke "ouvrages:locales"
       end
 
+      def generate_assets
+        invoke "ouvrages:assets"
+      end
+
       private
 
       def model?

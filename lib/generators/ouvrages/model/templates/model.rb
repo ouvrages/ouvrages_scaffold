@@ -1,5 +1,8 @@
 # Generated with: <%= command_line %>
 class <%= name.camelcase %> < ApplicationRecord
+<% if sortable? -%>
+  scope :sorted_by_position, -> { order(:position) }
+<% end -%>
 <% if singleton? -%>
   def self.instance
     first || new

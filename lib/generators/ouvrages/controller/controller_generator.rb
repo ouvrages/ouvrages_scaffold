@@ -16,19 +16,28 @@ module Ouvrages
       class_option :singleton, :type => :boolean, :default => false
       class_option :blocks, type: :boolean, default: false, desc: "Add blocks"
       class_option :admin, type: :boolean, default: false, :desc => "Enable admin namespace"
+      class_option :sortable, type: :boolean, default: false, desc: "Sortable list"
 
-      def create_controller_files
-        if admin_enabled?
-          template "controller.rb", File.join('app/controllers/admin', class_path, "#{controller_file_name}_controller.rb")
-        else
-          template "controller.rb", File.join('app/controllers', class_path, "#{controller_file_name}_controller.rb")
-        end
+      def create_controller_file
+        template "controller.rb", File.join(path, class_path, "#{controller_file_name}_controller.rb")
       end
 
       protected
 
+      def path
+        if admin_enabled?
+          'app/controllers/admin'
+        else
+          'app/controllers'
+        end
+      end
+
       def admin_enabled?
         Rails.application.config.admin_enable
+      end
+
+      def sortable?
+        options[:sortable]
       end
 
       def blocks?

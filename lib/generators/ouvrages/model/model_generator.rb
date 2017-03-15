@@ -10,6 +10,7 @@ module Ouvrages
       argument :attributes, type: :array, default: [], banner: "field[:type][:index] field[:type][:index]"
       class_option :singleton, type: :boolean, default: false , desc: "Create singleton model"
       class_option :blocks, type: :boolean, default: false, desc: "Add blocks"
+      class_option :sortable, type: :boolean, default: false, desc: "Sortable list"
 
       def create_model_file
         template "model.rb", File.join("app", "models", file_path + ".rb")
@@ -25,6 +26,10 @@ module Ouvrages
         self.attributes = (attributes || []).map do |attr|
           Rails::Generators::OuvragesGeneratedAttribute.parse(attr)
         end
+      end
+
+      def sortable?
+        options[:sortable]
       end
 
       def blocks?

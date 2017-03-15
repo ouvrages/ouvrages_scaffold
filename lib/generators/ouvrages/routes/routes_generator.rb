@@ -6,28 +6,84 @@ module Ouvrages
       class_option :show, :type => :boolean, :default => false, :desc => "Generate show action"
       class_option :singleton, :type => :boolean, :default => false
       class_option :admin, type: :boolean, default: false, :desc => "Enable admin namespace"
+      class_option :sortable, type: :boolean, default: false, desc: "Sortable list"
 
-      def add_route
-        if admin_enabled?
-          if options[:singleton]
-            append_to_file "config/routes/admin.rb", "\nresources :#{plural_table_name}, only: [:edit, :update]"
-          elsif options[:show]
-            append_to_file "config/routes/admin.rb", "\nresources :#{plural_table_name}\n"
-          else
-            append_to_file "config/routes/admin.rb", "\nresources :#{plural_table_name}, except: [:show]"
-          end
-        else
-          if options[:singleton]
-            insert_into_file "config/routes.rb", "\n  resources :#{plural_table_name}, only: [:edit, :update]", after: "Rails.application.routes.draw do\n"
-          elsif options[:show]
-            insert_into_file "config/routes.rb", "\n  resources :#{plural_table_name}\n", after: "Rails.application.routes.draw do\n"
-          else
-            insert_into_file "config/routes.rb", "\n  resources :#{plural_table_name}, except: [:show]", after: "Rails.application.routes.draw do\n"
-          end
-        end
+      def add_resource_route
+        insert_into_file(path, resource_route, params)
+        insert_into_file(path, sortable_route, params) if sortable?
       end
 
       protected
+
+      def params
+        options = {}
+        unless admin_enabled?
+          options[:after] = "Rails.application.routes.draw do\n"
+        end
+        options
+      end
+
+      def path
+        if admin_enabled?
+          "config/routes/admin.rb"
+        else
+          "config/routes.rb"
+        end
+      end
+
+      def resource_route
+        if singleton?
+          singleton_route
+        elsif show?
+          show_route
+        else
+          standard_route
+        end
+      end
+
+      def singleton_route
+        if admin_enabled?
+          "\nresources :#{plural_table_name}, only: [:edit, :update]\n"
+        else
+          "\n  resources :#{plural_table_name}, only: [:edit, :update]\n"
+        end
+      end
+
+      def show_route
+        if admin_enabled?
+          "\nresources :#{plural_table_name}\n"
+        else
+          "\n  resources :#{plural_table_name}\n"
+        end
+      end
+
+      def standard_route
+        if admin_enabled?
+          "\nresources :#{plural_table_name}, except: [:show]\n"
+        else
+          "\n  resources :#{plural_table_name}, except: [:show]\n"
+        end
+      end
+
+      def sortable_route
+        if admin_enabled?
+          "\npost '/#{plural_table_name}/sort', to: '#{plural_table_name}#sort', as: :sort_#{plural_table_name}\n"
+        else
+          "\n  post '/#{plural_table_name}/sort', to: '#{plural_table_name}#sort', as: :sort_#{plural_table_name}\n"
+        end
+      end
+
+      def singleton?
+        options[:singleton]
+      end
+
+      def show?
+        options[:show]
+      end
+
+      def sortable?
+        options[:sortable]
+      end
 
       def admin_enabled?
         Rails.application.config.admin_enable

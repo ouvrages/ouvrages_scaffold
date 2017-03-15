@@ -16,6 +16,7 @@ module Ouvrages
       class_option :singleton, :type => :boolean, :default => false
       class_option :blocks, type: :boolean, default: false, desc: "Add blocks"
       class_option :admin, type: :boolean, default: false, :desc => "Enable admin namespace"
+      class_option :sortable, type: :boolean, default: false, desc: "Sortable list"
 
       def initialize(args, *options)
         super(args, *options)
@@ -46,8 +47,24 @@ module Ouvrages
 
       protected
 
+      def path
+        if admin_enabled?
+          'app/views/admin'
+        else
+          'app/views'
+        end
+      end
+
       def admin_enabled?
         Rails.application.config.admin_enable
+      end
+
+      def show?
+        options[:show]
+      end
+
+      def sortable?
+        options[:sortable]
       end
 
       def blocks?
@@ -105,44 +122,23 @@ module Ouvrages
       end
 
       def generate_views
-        if admin_enabled?
-          views = {
-            "edit.html.#{ext}"                  => File.join('app/views/admin', @controller_file_path, "edit.html.#{ext}"),
-            "#{form_builder}_form.html.#{ext}"  => File.join('app/views/admin', @controller_file_path, "_form.html.#{ext}"),
-            "_nav.html.#{ext}"                  => File.join('app/views/admin', @controller_file_path, "_nav.html.#{ext}"),
-          }
+        views = {
+          "edit.html.#{ext}"                  => File.join(path, @controller_file_path, "edit.html.#{ext}"),
+          "#{form_builder}_form.html.#{ext}"  => File.join(path, @controller_file_path, "_form.html.#{ext}"),
+          "_nav.html.#{ext}"                  => File.join(path, @controller_file_path, "_nav.html.#{ext}"),
+        }
 
-          unless singleton?
-            views.merge!({
-              "index.html.#{ext}"                 => File.join('app/views/admin', @controller_file_path, "index.html.#{ext}"),
-              "new.html.#{ext}"                   => File.join('app/views/admin', @controller_file_path, "new.html.#{ext}"),
-            })
-          end
+        unless singleton?
+          views.merge!({
+            "index.html.#{ext}" => File.join(path, @controller_file_path, "index.html.#{ext}"),
+            "new.html.#{ext}" => File.join(path, @controller_file_path, "new.html.#{ext}"),
+          })
+        end
 
-          if options[:show]
-            views.merge!({
-              "show.html.#{ext}"                  => File.join('app/views/admin', @controller_file_path, "show.html.#{ext}"),
-            })
-          end
-        else
-          views = {
-            "edit.html.#{ext}"                  => File.join('app/views', @controller_file_path, "edit.html.#{ext}"),
-            "#{form_builder}_form.html.#{ext}"  => File.join('app/views', @controller_file_path, "_form.html.#{ext}"),
-            "_nav.html.#{ext}"                  => File.join('app/views', @controller_file_path, "_nav.html.#{ext}"),
-          }
-
-          unless singleton?
-            views.merge!({
-              "index.html.#{ext}"                 => File.join('app/views', @controller_file_path, "index.html.#{ext}"),
-              "new.html.#{ext}"                   => File.join('app/views', @controller_file_path, "new.html.#{ext}"),
-            })
-          end
-
-          if options[:show]
-            views.merge!({
-              "show.html.#{ext}"                  => File.join('app/views', @controller_file_path, "show.html.#{ext}"),
-            })
-          end
+        if show?
+          views.merge!({
+            "show.html.#{ext}" => File.join(path, @controller_file_path, "show.html.#{ext}"),
+          })
         end
 
         options.engine == generate_erb(views)

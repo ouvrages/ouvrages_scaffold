@@ -96,6 +96,15 @@ class <%= controller_class_name %>Controller < ApplicationController
   end
 
 <% end -%>
+<% if sortable? -%>
+  def sort
+    params[:item_ids].each_with_index do |id, index|
+      <%= singular_table_name.classify.constantize %>.where(id: id).update_all(position: index)
+    end
+    render json: { status: 'ok' }
+  end
+
+<% end -%>
   protected
 
   def return_url(<%= singular_table_name %>)
