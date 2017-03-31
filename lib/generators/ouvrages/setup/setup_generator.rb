@@ -128,8 +128,10 @@ EOF
       def rename_application_layouts
         remove_file 'app/views/layouts/application.html.erb'
         create_file 'app/views/layouts/application.html.haml'
-        append_to_file 'app/views/layouts/application.html.haml' do
-<<-EOF
+
+        unless options[:admin]
+          append_to_file 'app/views/layouts/application.html.haml' do
+            <<-EOF
 %html
   %head
     %meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")
@@ -165,6 +167,22 @@ EOF
           = flash[:error]
       = yield
 EOF
+          end
+        else
+          append_to_file 'app/views/layouts/application.html.haml' do
+            <<-EOF
+%html
+  %head
+    %meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")
+    %title
+      = content_for(:title)
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    = yield
+EOF
+          end
         end
       end
 
