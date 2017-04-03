@@ -6,6 +6,10 @@ module Ouvrages
 
       class_option :admin, type: :boolean, default: false
 
+      def add_load_path
+        environment "config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]"
+      end
+
       def install_gems
         if File.exists?("Gemfile")
           gem 'haml-rails'

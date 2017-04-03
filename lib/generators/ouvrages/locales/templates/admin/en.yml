@@ -1,7 +1,7 @@
 en:
   admin:
     <%= plural_table_name %>:
-  <% unless singleton? -%>
+<% unless singleton? -%>
       index:
         title: List of <%= resources %>
         actions: Actions
@@ -11,47 +11,47 @@ en:
         confirm: &confirm <%= capitalize_first_letter(the_resource) %> will by deleted. Are you sure?
         new: Add <%= a_resource %>
         empty: The list is empty.
-  <% end -%>
+<% end -%>
       edit:
-  <% if singleton? -%>
+<% if singleton? -%>
         title: "Modification <%= of_resource %>"
-  <% else -%>
+<% else -%>
         title: "Modification <%= of_resource %> %{name}"
-  <% end -%>
+<% end -%>
         submit: Save <%= the_resource %>
         cancel: Cancel
-  <% unless singleton? -%>
+<% unless singleton? -%>
       new:
         title: New <%= resource %>
         submit: Save <%= the_resource %>
         cancel: Cancel
-  <% end -%>
-  <% if show? -%>
+<% end -%>
+<% if show? -%>
       show:
         title: "<%= capitalize_first_letter(resource) %> %{name}"
         edit: *edit
         destroy: *destroy
         confirm: *confirm
         back: Back
-  <% end -%>
+<% end -%>
       form:
-  <% if singleton? -%>
+<% if singleton? -%>
         title: "<%= capitalize_first_letter(resource) %>"
-  <% else -%>
+<% else -%>
         title: "<%= capitalize_first_letter(resource) %> %{name}"
-  <% end -%>
+<% end -%>
         cancel: Cancel
         submit: Save <%= the_resource %>
 
-  <% unless singleton? -%>
+<% unless singleton? -%>
       created: <%= capitalize_first_letter the_resource %> was successfully added.
       removed: <%= capitalize_first_letter the_resource %> was successfully removed.
-  <% end -%>
+<% end -%>
       updated: <%= capitalize_first_letter the_resource %> was successfully updated.
       
     navigation:
-    <% if singleton? -%>
+<% if singleton? -%>
       <%= plural_table_name %>: <%= capitalize_first_letter(resource) %>
-    <% else -%>
+<% else -%>
       <%= plural_table_name %>: <%= capitalize_first_letter(resources) %>
-    <% end -%>
+<% end -%>
