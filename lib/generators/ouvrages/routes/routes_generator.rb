@@ -3,6 +3,9 @@ require 'rails/generators'
 module Ouvrages
   module Generators
     class RoutesGenerator < ::Rails::Generators::NamedBase
+      include Rails::Generators::ResourceHelpers
+      source_root File.expand_path('../templates', __FILE__)
+
       class_option :show, :type => :boolean, :default => false, :desc => "Generate show action"
       class_option :singleton, :type => :boolean, :default => false
       class_option :admin, type: :boolean, default: false, :desc => "Enable admin namespace"
@@ -17,7 +20,9 @@ module Ouvrages
 
       def params
         options = {}
-        unless admin_enabled?
+        if admin_enabled?
+          options[:after] = "root to: 'dashboard#index'\n"
+        else
           options[:after] = "Rails.application.routes.draw do\n"
         end
         options

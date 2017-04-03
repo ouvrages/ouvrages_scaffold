@@ -1,6 +1,6 @@
 <% module_namespacing do -%>
 <% if admin_enabled? -%>
-class Admin::<%= controller_class_name %>Controller < ApplicationController
+class Admin::<%= controller_class_name %>Controller < Admin::BaseController
 <% else -%>
 class <%= controller_class_name %>Controller < ApplicationController
 <% end -%>

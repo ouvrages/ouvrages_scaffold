@@ -26,7 +26,7 @@
         <%- if sortable? -%>
           - sortable_url = sort_<%= controller_routing_path %>_url
         <%- end -%>
-        %tbody{data: { sortable_url: sortable_url } }
+        %tbody{data: { sortable_url: <%= (sortable? ? sortable_url : nil) %> } }
           - @<%= plural_resource_name %>.<%= (sortable? ? 'sorted_by_position.' : nil) %>each do |<%= resource_name %>|
             - data = {}
             <%- if sortable? -%>
@@ -49,8 +49,8 @@
 <% end -%>
                 <%- end -%>
 <% if admin_enabled? -%>
-                = link_to t('.edit'), edit_<%= singular_controller_routing_path %>_path(<%= resource_name %>), :class => 'btn btn-sm btn-primary' if can? :update, <%= resource_name %>
-                = link_to t('.destroy'), <%= singular_controller_routing_path %>_path(<%= resource_name %>), :method => :delete, :data => { :confirm => t('.confirm') }, :class => 'btn btn-sm btn-danger' if can? :destroy, <%= resource_name %>
+                = link_to t('.edit'), edit_admin_<%= singular_controller_routing_path %>_path(<%= resource_name %>), :class => 'btn btn-sm btn-primary' if can? :update, <%= resource_name %>
+                = link_to t('.destroy'), admin_<%= singular_controller_routing_path %>_path(<%= resource_name %>), :method => :delete, :data => { :confirm => t('.confirm') }, :class => 'btn btn-sm btn-danger' if can? :destroy, <%= resource_name %>
 <% else -%>
                 = link_to t('.edit'), edit_<%= singular_controller_routing_path %>_path(<%= resource_name %>), :class => 'btn btn-sm btn-primary' if can? :update, <%= resource_name %>
                 = link_to t('.destroy'), <%= singular_controller_routing_path %>_path(<%= resource_name %>), :method => :delete, :data => { :confirm => t('.confirm') }, :class => 'btn btn-sm btn-danger' if can? :destroy, <%= resource_name %>

@@ -20,7 +20,7 @@ module Ouvrages
       end
 
       def add_position_to_table
-        migration_template "position.rb", "db/migrate/add_position_to_#{table_name}.rb"
+        migration_template "position.rb", "db/migrate/add_position_to_#{table_name}.rb" if sortable?
       end
 
       protected
