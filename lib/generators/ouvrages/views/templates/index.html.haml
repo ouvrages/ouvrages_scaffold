@@ -24,9 +24,10 @@
             <%- end -%>
             %th= t('.actions')
         <%- if sortable? -%>
-          - sortable_url = sort_<%= controller_routing_path %>_url
+        %tbody{data: { sortable_url: sort_<%= controller_routing_path %>_url }}
+        <%- else -%>
+        %tbody
         <%- end -%>
-        %tbody{data: <%= (sortable? ? { sortable_url: sortable_url } : nil) %> }
           - @<%= plural_resource_name %>.<%= (sortable? ? 'sorted_by_position.' : nil) %>each do |<%= resource_name %>|
             - data = {}
             <%- if sortable? -%>
