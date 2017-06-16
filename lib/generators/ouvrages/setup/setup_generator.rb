@@ -70,6 +70,7 @@ EOF
 <<-EOF
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
 //= require bootstrap-sprockets
 //= require sortable-rails-jquery
 EOF
@@ -79,6 +80,7 @@ EOF
 <<-EOF
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
 //= require bootstrap-sprockets
 //= require sortable-rails-jquery
 EOF

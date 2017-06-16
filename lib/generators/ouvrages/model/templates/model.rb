@@ -21,4 +21,7 @@ class <%= name.camelcase %> < ApplicationRecord
 <% if blocks? -%>
   has_blocks([])
 <% end -%>
+  def to_label
+    raise "TODO: set to_label"
+  end
 end
