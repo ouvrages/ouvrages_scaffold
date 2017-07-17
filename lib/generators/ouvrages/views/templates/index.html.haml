@@ -23,7 +23,9 @@
             %th= <%= resource_name.classify %>.human_attribute_name(:<%= attribute.name %>)
             <%- end -%>
             %th= t('.actions')
-        <%- if sortable? -%>
+        <%- if sortable? and admin_enabled? -%>
+        %tbody{data: { sortable_url: admin_sort_<%= controller_routing_path %>_url }}
+        <%- elsif sortable? -%>
         %tbody{data: { sortable_url: sort_<%= controller_routing_path %>_url }}
         <%- else -%>
         %tbody
