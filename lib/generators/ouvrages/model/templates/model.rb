@@ -1,5 +1,8 @@
 # Generated with: <%= command_line %>
 class <%= name.camelcase %> < ApplicationRecord
+<% if activable? -%>
+  scope :active, -> { where(active: true) }
+<% end -%>
 <% if sortable? -%>
   scope :sorted_by_position, -> { order(:position) }
 <% end -%>

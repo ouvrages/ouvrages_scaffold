@@ -11,6 +11,7 @@ module Ouvrages
       class_option :singleton, type: :boolean, default: false , desc: "Create singleton model"
       class_option :blocks, type: :boolean, default: false, desc: "Add blocks"
       class_option :sortable, type: :boolean, default: false, desc: "Sortable list"
+      class_option :activable, type: :boolean, default: false, desc: "Activable"
 
       def create_model_file
         template "model.rb", File.join("app", "models", file_path + ".rb")
@@ -26,6 +27,10 @@ module Ouvrages
         self.attributes = (attributes || []).map do |attr|
           Rails::Generators::OuvragesGeneratedAttribute.parse(attr)
         end
+      end
+
+      def activable?
+        options[:activable]
       end
 
       def sortable?

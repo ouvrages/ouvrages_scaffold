@@ -9,6 +9,7 @@ module Ouvrages
 
       argument :attributes, type: :array, default: [], banner: "field[:type][:index] field[:type][:index]"
       class_option :sortable, type: :boolean, default: false, desc: "Sortable list"
+      class_option :activable, type: :boolean, default: false, desc: "Activable"
 
       def self.next_migration_number(dirname)
         next_migration_number = current_migration_number(dirname) + 1
@@ -23,7 +24,15 @@ module Ouvrages
         migration_template "position.rb", "db/migrate/add_position_to_#{table_name}.rb" if sortable?
       end
 
+      def add_active_to_table
+        migration_template "active.rb", "db/migration_add_active_to_#{table_name}.rb" if activable?
+      end
+
       protected
+
+      def activable?
+        options[:activable]
+      end
 
       def sortable?
         options[:sortable]
