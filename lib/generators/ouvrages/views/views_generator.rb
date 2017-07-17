@@ -164,6 +164,10 @@ module Ouvrages
           :rich_text_field
         when :image
           :image_field
+        when :address
+          :address_field
+        when :datetimepicker
+          :datetimepicker_field
         else
           attribute.field_type
         end

@@ -9,6 +9,12 @@ class <%= migration_class_name %> < ActiveRecord::Migration[<%= ActiveRecord::Mi
       t.string :<%= attribute.name %>_name
 <% elsif attribute.type == :rich_text -%>
       t.text :<%= attribute.name %>
+<% elsif attribute.type == :address -%>
+      t.string :address
+      t.string :latitude
+      t.string :longitude
+<% elsif attribute.type == :datetimepicker -%>
+      t.date :<%= attribute.name %>
 <% elsif attribute.type == :belongs_to or attribute.foreign_key? -%>
       t.integer :<%= attribute.name %>_id
 <% else -%>
